@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using BoxTI.Challenge.CovidTracking.WebApi.ApplicationServices;
 using BoxTI.Challenge.CovidTracking.WebApi.ApplicationServices.Interfaces;
+using BoxTI.Challenge.CovidTracking.WebApi.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -41,10 +43,12 @@ namespace BoxTI.Challenge.CovidTracking.WebApi
                 client.DefaultRequestHeaders.Add("x-rapidapi-key", Configuration["CovidTrackingApi:Key"]);
                 client.DefaultRequestHeaders.Add("x-rapidapi-host", Configuration["CovidTrackingApi:Host"]);
             });
+
+            services.AddDbContext<ApplicationContext>(builder => builder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context)
         {
             if (env.IsDevelopment())
             {
@@ -53,6 +57,8 @@ namespace BoxTI.Challenge.CovidTracking.WebApi
                 app.UseSwaggerUI(c =>
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "BoxTI.Challenge.CovidTracking.WebApi v1"));
             }
+
+            context.Database.EnsureCreatedAsync();
 
             app.UseHttpsRedirection();
 

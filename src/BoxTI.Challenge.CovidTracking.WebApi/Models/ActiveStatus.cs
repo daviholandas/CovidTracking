@@ -2,7 +2,7 @@ namespace BoxTI.Challenge.CovidTracking.WebApi.Models
 {
     public enum ActiveStatus
     {
-        Actived,
-        Desactived
+        Actived = 1,
+        Desactived = 0
     }
 }
