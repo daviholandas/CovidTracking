@@ -2,7 +2,7 @@ using System;
 
 namespace BoxTI.Challenge.CovidTracking.WebApi.Models
 {
-    public struct Result<T>
+    public readonly struct Result<T>
     {
         public Result(T value)
         {
@@ -25,7 +25,7 @@ namespace BoxTI.Challenge.CovidTracking.WebApi.Models
             => new Result<T>(value);
     }
 
-    public struct Result
+    public readonly struct Result
     {
         public Result(bool isSuccess)
         {
@@ -43,8 +43,13 @@ namespace BoxTI.Challenge.CovidTracking.WebApi.Models
 
         public static Result<T> Success<T>(T value)
             => new Result<T>(value);
+        public static Result<T> NotSuccess<T>(Exception error)
+            => new Result<T>(error);
 
         public static Result NotSuccess(Exception error)
             => new Result(error);
+
+        public static Result Success()
+            => new Result(true);
     }
 }

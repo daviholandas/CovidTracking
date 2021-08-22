@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -14,16 +15,19 @@ namespace BoxTI.Challenge.CovidTracking.WebApi.ApplicationServices
 
         public Covid19TrackingService(HttpClient covidTrackingClient)
             => _covidTrackingClient = covidTrackingClient;
-        
-        public async Task<Result<IEnumerable<CovidTrackingInfoDto>>> GetLatestCovidReport()
-        {
-            var result = await _covidTrackingClient.GetFromJsonAsync<IEnumerable<CovidTrackingInfoDto>>(""); 
-            return Result.Success(result);
-        }
-
         public async Task<Result<CovidTrackingInfoDto>> GetLatestCovidReportByLocation(string locationName)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var response = await _covidTrackingClient
+                    .GetFromJsonAsync<CovidTrackingInfoDto>($"/v1/{locationName.ToLower()}");
+                _covidTrackingClient.Dispose();
+                return  Result.Success<CovidTrackingInfoDto>(response);
+            }
+            catch (Exception e)
+            {
+                return Result.NotSuccess<CovidTrackingInfoDto>(e);
+            }
         }
     }
 }

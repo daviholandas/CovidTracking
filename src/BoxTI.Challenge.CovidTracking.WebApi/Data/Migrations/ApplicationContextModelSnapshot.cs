@@ -41,42 +41,42 @@ namespace BoxTI.Challenge.CovidTracking.WebApi.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f5f6ccc7-f4ca-4464-a19d-e34f91c449ba"),
+                            Id = new Guid("a692679d-78c3-4787-ab5e-811921e2688d"),
                             Abbreviation = "BR",
                             ActiveStatus = 1,
                             Name = "Brazil"
                         },
                         new
                         {
-                            Id = new Guid("67a45522-526a-465f-b561-dc324cfebc3d"),
+                            Id = new Guid("cb250c26-6683-4e58-b86b-96f947d73d9d"),
                             Abbreviation = "JP",
                             ActiveStatus = 1,
                             Name = "Japan"
                         },
                         new
                         {
-                            Id = new Guid("dab860dc-cfe8-4aea-835a-9cc598c357fd"),
+                            Id = new Guid("78418662-981c-4127-a203-bb11d7e8cef6"),
                             Abbreviation = "NL",
                             ActiveStatus = 1,
                             Name = "Netherlands"
                         },
                         new
                         {
-                            Id = new Guid("4ad0e2a6-6ddb-4cd1-badc-ca7e4882d59d"),
+                            Id = new Guid("9fbc47c5-f5a8-4363-8452-0325be5256f7"),
                             Abbreviation = "NG",
                             ActiveStatus = 1,
                             Name = "Nigeria"
                         },
                         new
                         {
-                            Id = new Guid("47db3c74-ddf8-46c1-ab01-a1400b47cf5f"),
+                            Id = new Guid("46832224-7952-4a10-84d9-ac855df6d8bb"),
                             Abbreviation = "AU",
                             ActiveStatus = 1,
                             Name = "Australia"
                         },
                         new
                         {
-                            Id = new Guid("43cd6707-0e21-41cd-b345-489799f51205"),
+                            Id = new Guid("49bce409-009b-4c1b-93d1-4fcca7023521"),
                             Abbreviation = "W",
                             ActiveStatus = 1,
                             Name = "World"
@@ -89,8 +89,8 @@ namespace BoxTI.Challenge.CovidTracking.WebApi.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ActiveCases")
-                        .HasColumnType("varchar(125)");
+                    b.Property<double>("ActiveCases")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
@@ -98,11 +98,11 @@ namespace BoxTI.Challenge.CovidTracking.WebApi.Data.Migrations
                     b.Property<Guid>("LocationId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("NewCases")
-                        .HasColumnType("varchar(125)");
+                    b.Property<double>("NewCases")
+                        .HasColumnType("float");
 
-                    b.Property<string>("NewDeaths")
-                        .HasColumnType("varchar(125)");
+                    b.Property<double>("NewDeaths")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");

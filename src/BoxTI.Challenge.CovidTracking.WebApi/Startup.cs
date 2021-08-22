@@ -57,8 +57,8 @@ namespace BoxTI.Challenge.CovidTracking.WebApi
                 app.UseSwaggerUI(c =>
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "BoxTI.Challenge.CovidTracking.WebApi v1"));
             }
-
-            context.Database.EnsureCreatedAsync();
+            
+            context.Database.EnsureCreated();
 
             app.UseHttpsRedirection();
 

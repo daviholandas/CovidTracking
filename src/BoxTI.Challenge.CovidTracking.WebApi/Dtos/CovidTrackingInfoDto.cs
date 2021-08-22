@@ -7,7 +7,8 @@ namespace BoxTI.Challenge.CovidTracking.WebApi
     public struct CovidTrackingInfoDto
     {
         [JsonPropertyName("Active Cases_text")]
-        public string ActiveCases {get; set;}
+        [JsonConverter(typeof(JsonConvertOnlyNumbers))]
+        public double ActiveCases {get; set;}
         
         [JsonPropertyName("Country_text")]
         public string Country {get; set;}
@@ -17,10 +18,12 @@ namespace BoxTI.Challenge.CovidTracking.WebApi
         public DateTime LastUpdate {get; set;}
         
         [JsonPropertyName("New Cases_text")]
-        public string NewCases {get; set;}
+        [JsonConverter(typeof(JsonConvertOnlyNumbers))]
+        public double NewCases {get; set;}
         
         [JsonPropertyName("New Deaths_text")]
-        public string NewDeaths {get; set;}
+        [JsonConverter(typeof(JsonConvertOnlyNumbers))]
+        public double NewDeaths {get; set;}
         
         [JsonPropertyName("Total Cases_text")]
         [JsonConverter(typeof(JsonConvertStringToNumber))]

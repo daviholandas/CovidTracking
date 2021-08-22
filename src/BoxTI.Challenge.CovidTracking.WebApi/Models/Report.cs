@@ -4,7 +4,7 @@ namespace BoxTI.Challenge.CovidTracking.WebApi.Models
 {
     public class Report : ModelBase
     {
-        public Report(DateTime registerDate, string activeCases, string newCases, string newDeaths, double totalCases, 
+        public Report(DateTime registerDate, double activeCases, double newCases, double newDeaths, double totalCases, 
             double totalDeaths, double totalRecovered, DateTime lastUpdate, Guid locationId)
         {
             RegisterDate = registerDate;
@@ -21,9 +21,9 @@ namespace BoxTI.Challenge.CovidTracking.WebApi.Models
         private Report(){}
         
         public DateTime RegisterDate { get; private set; }
-        public string ActiveCases { get; private set; }
-        public string NewCases { get; private set; }
-        public string NewDeaths { get; private set; }
+        public double ActiveCases { get; private set; }
+        public double NewCases { get; private set; }
+        public double NewDeaths { get; private set; }
         public double TotalCases { get; private set; }
         public double TotalDeaths { get; private set; }
         public double TotalRecovered { get; private set; }
@@ -32,5 +32,12 @@ namespace BoxTI.Challenge.CovidTracking.WebApi.Models
         
         //EF relation
         public Guid LocationId { get; private set; }
+
+        public double CalculatePercentActiveCases(double activeCaseCompareTO)
+        {
+            if (ActiveCases == 0 || activeCaseCompareTO == 0)
+                return default;
+            return Math.Round((activeCaseCompareTO /ActiveCases), 2) * 100;
+        }
     } 
 }

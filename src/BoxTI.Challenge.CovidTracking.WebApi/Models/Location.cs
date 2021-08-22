@@ -16,7 +16,7 @@ namespace BoxTI.Challenge.CovidTracking.WebApi.Models
         //EF relation
         public ICollection<Report> Reports { get; private set; }
 
-        private void ChangeActiveStatus(ActiveStatus activeStatus)
+        public void ChangeActiveStatus(ActiveStatus activeStatus)
             => ActiveStatus = activeStatus;
     }
 }
